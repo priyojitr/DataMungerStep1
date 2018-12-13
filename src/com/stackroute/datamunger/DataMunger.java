@@ -30,6 +30,14 @@ import java.util.List;
  */
 
 public class DataMunger {
+	
+	/*
+	 * creating default constructor
+	 */
+	
+	public DataMunger() {
+//		empty/default constructor
+	}
 
 	/*
 	 * This method will split the query string based on space into an array of words
@@ -38,8 +46,7 @@ public class DataMunger {
 
 	public String[] getSplitStrings(String queryString) {
 
-		String words[] = queryString.toLowerCase().split(" ");
-		return words;
+		return queryString.toLowerCase().split(" ");
 	}
 
 	/*
@@ -52,8 +59,7 @@ public class DataMunger {
 
 	public String getFileName(String queryString) {
 
-		String result = queryString.split("from")[1].split(" ")[1];
-		return result;
+		return queryString.split("from")[1].split(" ")[1];
 	}
 
 	/*
@@ -238,15 +244,15 @@ public class DataMunger {
 				|| queryString.contains("min(")
 				|| queryString.contains("max(")
 				|| queryString.contains("avg(")) {
-			String[] aggregateFunctions = queryString.split("select")[1].trim()
+			String[] aggFuncs = queryString.split("select")[1].trim()
 					.split("from")[0].trim().split(",");
-			for(int i = 0; i < aggregateFunctions.length; i++) {
-				if(aggregateFunctions[i].contains("count(")
-						|| aggregateFunctions[i].contains("sum(")
-						|| aggregateFunctions[i].contains("min(")
-						|| aggregateFunctions[i].contains("max(")
-						|| aggregateFunctions[i].contains("avg(")) {
-					finalList.add(aggregateFunctions[i]);
+			for(int i = 0; i < aggFuncs.length; i++) {
+				if(aggFuncs[i].contains("count(")
+						|| aggFuncs[i].contains("sum(")
+						|| aggFuncs[i].contains("min(")
+						|| aggFuncs[i].contains("max(")
+						|| aggFuncs[i].contains("avg(")) {
+					finalList.add(aggFuncs[i]);
 				}
 			}
 			output = new String[finalList.size()];
